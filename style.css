@@ -1,0 +1,60 @@
+html,
+body {
+  height: 100%;
+  background-color: #333;
+}
+body {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+h1 {
+  color: #6d9fac;
+  font-size: 22px;
+  text-align: center;
+font-family: 'Open Sans Condensed', sans-serif;
+}
+#logo{
+  max-width: 500px;
+
+}
+.site-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%; /* For at least Firefox */
+  min-height: 100%;
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+  padding: 40px;
+}
+
+/* Start the vertical centering */
+.site-wrapper-inner {
+  vertical-align: middle;
+}
+
+.input-group{
+  width: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+
+}
+
+ .btn-group{
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+ }
+
+
+.mastfoot {
+  color: #999;
+  color: rgba(255,255,255,.5);
+}
