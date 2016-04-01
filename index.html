@@ -5,7 +5,8 @@
   <link rel="stylesheet" href ="style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic' rel='stylesheet' type='text/css'>
 <link rel="icon" href="Guessing-Game-logo.png">
-
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="guessingGame.js"></script>
   <title>GHA - Guessing Game - Lori</title>
 </head>
 <body>
@@ -16,12 +17,12 @@
 
 
     <div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Your Guess</span>
-  <input type="text" class="form-control" placeholder="Choose a number between 1-100">
+  <span class="input-group-addon" >Your Guess</span>
+  <input id="guess" type="text" class="form-control" placeholder="Choose a number between 1-100">
 </div>
 
 <div class="btn-group">
-    <button type="button" class="btn btn-lg btn-default">Guess!</button>
+    <button type="button" class="btn btn-lg btn-default" id="submit">Guess!</button>
     <button type="button" class="btn btn-lg btn-default">Reset</button>
   </div>
   </div>
