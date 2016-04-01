@@ -1,4 +1,5 @@
-var playersGuess, winningNumber;
+var playersGuess, winningNumber,
+tries = [];//length of tries = count
 
 /* **** Guessing Game Functions **** */
 
@@ -25,10 +26,11 @@ function playersGuessSubmission(){
 
 function lowerOrHigher(){
 	// add code here
-  alert ("Oh well");
+  if(playersGuess<winningNumber){
 
+  }else{
 
-
+  }
 }
 
 // Check if the Player's Guess is the winning number
@@ -36,15 +38,24 @@ function lowerOrHigher(){
 function checkGuess(){
 	// add code here
   console.log(winningNumber + " " + playersGuess);
+  //if good guess, then done
   if(playersGuess===winningNumber){
-    alert("Winner, winner, chicken dinner!");
+    msgUpdate("Winner, winner, chicken dinner!");
+    playAgain();
+  }else if(!tries.includes(playersGuess)){
+      //if new incorrect guess add guess to array
+      tries.push(playersGuess);
 
-  }else{
-    
+      if(tries.length<5) {
+        msgUpdate("Try Again!");
+      }else{
+        msgUpdate("You've used all your guesses");
+        playAgain();
+      }
 
-  }
-
-  playAgain();
+    } else {
+      msgUpdate("Submitted duplicate guess. Try again")
+    }
 }
 
 // Create a provide hint button that provides additional clues to the "Player"
@@ -59,14 +70,30 @@ function playAgain(){
 	// add code here
 }
 
+function msgUpdate(msg){
+  $("#message").text(msg);
+}
+
 
 /* **** Event Listeners/Handlers ****  */
 //on document load
 $(document).ready(function() {
-  generateWinningNumber();
 
+
+  generateWinningNumber();
   $("#submit").click(function() {
     playersGuessSubmission();
   });
+  $("input").keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        playersGuessSubmission();
+    }
+});
+  $("#guess").focus(function(){
+    msgUpdate("");
+  })
+
+
 
 });
