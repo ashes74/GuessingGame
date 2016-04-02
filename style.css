@@ -38,6 +38,15 @@ font-family: 'Open Sans Condensed', sans-serif;
   vertical-align: middle;
 }
 
+.win{
+  color: red;
+  font-size: 40px;
+  font-style: italic;
+  font-family: monospace;
+  border-style: double;
+  margin: 20px;
+}
+
 .input-group{
   width: 75%;
   display: block;

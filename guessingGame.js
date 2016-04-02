@@ -8,17 +8,17 @@ tries = [];//length of tries = count
 function generateWinningNumber(){
 	// add code here
   var min = 1, max =100;
-  return winningNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  return winningNumber = getRandom(min,max);
 
 }
-
+function getRandom(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 // Fetch the Players Guess
 
 function playersGuessSubmission(){
 	// add code here
   playersGuess = +$("#guess").val();
-  //console.log(typeof playersGuess);
-  $("#guess").val("");
   return checkGuess();
 }
 
@@ -26,35 +26,34 @@ function playersGuessSubmission(){
 
 function lowerOrHigher(){
 	// add code here
+
+  var relative, distance, result;
   if(playersGuess<winningNumber){
-
+    relative = "lower";
   }else{
+    relative = "higher";
+  };
 
-  }
+  distance = Math.abs(winningNumber-playersGuess)+ getRandom(1,10);
+  //debugger;
+  result = "<p>Try Again! Your guess is "+relative+" than the winning number. </p><p> You're within "+ distance+ " though.</p>";
+  return result;
 }
 
 // Check if the Player's Guess is the winning number
 
 function checkGuess(){
 	// add code here
-  console.log(winningNumber + " " + playersGuess);
-  //if good guess, then done
   if(playersGuess===winningNumber){
     msgUpdate("Winner, winner, chicken dinner!");
-    playAgain();
+    $("#message").addClass("win");
   }else if(!tries.includes(playersGuess)){
       //if new incorrect guess add guess to array
       tries.push(playersGuess);
-
-      if(tries.length<5) {
-        msgUpdate("Try Again!");
-      }else{
-        msgUpdate("You've used all your guesses");
-        playAgain();
-      }
-
+      guessMessage();
     } else {
-      msgUpdate("Submitted duplicate guess. Try again")
+    msgUpdate("Submitted duplicate guess. Try again");
+
     }
 }
 
@@ -62,16 +61,45 @@ function checkGuess(){
 
 function provideHint(){
 	// add code here
+  var numofHints = (tries.length)*2;
+  if (numofHints>0){
+  //debugger;
+  var hints = [];
+  for (var i=0; i<numofHints+1; i++){
+    var newNum = getRandom(1,100);
+    hints[i]=newNum;
+    //debugger;
+  };
+  console.log(hints);
+  hints[getRandom(0,numofHints)]=winningNumber;
+  console.log(hints);
+  msgUpdate("The number is one of the following numbers: " + hints.toString());
+}
+else {msgUpdate("At least try first. :)")}
 }
 
 // Allow the "Player" to Play Again
-
 function playAgain(){
 	// add code here
+  generateWinningNumber();
+  tries = [];
+  msgUpdate("");
+  $("#guess").val("");
+  $("#message").removeClass("win");
+
 }
 
 function msgUpdate(msg){
-  $("#message").text(msg);
+  $("#message").html(msg);
+}
+
+function guessMessage(){
+  if(tries.length<5) {
+    msg =lowerOrHigher();
+  }else{
+    msg="You've used all your guesses. The number was "+ winningNumber;
+  }
+  msgUpdate(msg);
 }
 
 
@@ -82,7 +110,9 @@ $(document).ready(function() {
 
   generateWinningNumber();
   $("#submit").click(function() {
-    playersGuessSubmission();
+    if($("#guess").val()){
+      playersGuessSubmission();
+    }
   });
   $("input").keypress(function(event) {
     if (event.which == 13) {
@@ -92,6 +122,13 @@ $(document).ready(function() {
 });
   $("#guess").focus(function(){
     msgUpdate("");
+  });
+  $("#hint").click(function(){
+    provideHint();
+  });
+  $("#reset").click(function(){
+    playAgain();
+
   })
 
 
