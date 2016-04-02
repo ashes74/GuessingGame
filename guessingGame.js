@@ -19,6 +19,7 @@ function getRandom(min, max){
 function playersGuessSubmission(){
 	// add code here
   playersGuess = +$("#guess").val();
+  $("#guess").val("");
   return checkGuess();
 }
 
@@ -27,16 +28,21 @@ function playersGuessSubmission(){
 function lowerOrHigher(){
 	// add code here
 
-  var relative, distance, result;
+  var relative, distance, temp, result;
   if(playersGuess<winningNumber){
-    relative = "lower";
+    relative = "too low";
   }else{
-    relative = "higher";
+    relative = "too high";
   };
 
   distance = Math.abs(winningNumber-playersGuess)+ getRandom(1,10);
+
+  if (distance<5){temp = "SUUUPPPER CLOSE";}
+  else if(distance<20){temp = "warm";}
+  else if(distance<50){temp = "cool... but not close";}
+  else{temp= "BRRRR. Soo cold, just start over."}
   //debugger;
-  result = "<p>Try Again! Your guess is "+relative+" than the winning number. </p><p> You're within "+ distance+ " though.</p>";
+  result = "<p>Try Again! Your guess is "+relative+". </p><h3> You're "+temp+"</h3><p>At least "+ distance+ " away.</p>";
   return result;
 }
 
@@ -44,17 +50,22 @@ function lowerOrHigher(){
 
 function checkGuess(){
 	// add code here
+  if(tries.length<5){
   if(playersGuess===winningNumber){
     msgUpdate("Winner, winner, chicken dinner!");
     $("#message").addClass("win");
   }else if(!tries.includes(playersGuess)){
       //if new incorrect guess add guess to array
       tries.push(playersGuess);
+      $(".guessCount").html( "<p>"+(5-tries.length) +" guesses remaining.</p>");
       guessMessage();
     } else {
     msgUpdate("Submitted duplicate guess. Try again");
 
     }
+  }else {
+    msgUpdate("No guesses remaining");
+  }
 }
 
 // Create a provide hint button that provides additional clues to the "Player"
@@ -84,8 +95,10 @@ function playAgain(){
   generateWinningNumber();
   tries = [];
   msgUpdate("");
-  $("#guess").val("");
-  $("#message").removeClass("win");
+  $(".guessCount").html("");
+  $("#message").removeClass("win")
+  $("#message").removeClass("lose");
+    $("#guess").removeClass("disabled")
 
 }
 
@@ -96,8 +109,12 @@ function msgUpdate(msg){
 function guessMessage(){
   if(tries.length<5) {
     msg =lowerOrHigher();
+
   }else{
     msg="You've used all your guesses. The number was "+ winningNumber;
+    $("#message").addClass("lose");
+    $("#submit").addClass("disabled");
+
   }
   msgUpdate(msg);
 }

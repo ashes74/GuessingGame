@@ -47,6 +47,12 @@ font-family: 'Open Sans Condensed', sans-serif;
   margin: 20px;
 }
 
+.lose{
+  color: white;
+  background-color: rosybrown;
+  margin: 10px;
+}
+
 .input-group{
   width: 75%;
   display: block;
@@ -63,7 +69,15 @@ font-family: 'Open Sans Condensed', sans-serif;
  }
 
 
+
 .mastfoot {
   color: #999;
   color: rgba(255,255,255,.5);
+}
+
+.guessCount{
+  border-style: dotted;
+  margin: 20px;
+  color: grey;
+  font-size: 15px;
 }
