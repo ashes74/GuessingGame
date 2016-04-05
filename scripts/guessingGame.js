@@ -54,6 +54,7 @@ function checkGuess(){
   if(playersGuess===winningNumber){
     msgUpdate("Winner, winner, chicken dinner!");
     $("#message").addClass("win");
+    disableGuess();
   }else if(!tries.includes(playersGuess)){
       //if new incorrect guess add guess to array
       tries.push(playersGuess);
@@ -65,6 +66,7 @@ function checkGuess(){
     }
   }else {
     msgUpdate("No guesses remaining");
+    disableGuess();
   }
 }
 
@@ -113,12 +115,14 @@ function guessMessage(){
   }else{
     msg="You've used all your guesses. The number was "+ winningNumber;
     $("#message").addClass("lose");
-    $("#submit").addClass("disabled");
-
+    disableGuess();
   }
   msgUpdate(msg);
 }
 
+function disableGuess() {
+    $("#submit").addClass("disabled");
+}
 
 /* **** Event Listeners/Handlers ****  */
 //on document load
