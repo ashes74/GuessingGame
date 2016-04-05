@@ -1,5 +1,5 @@
 var playersGuess, winningNumber,
-tries = [];//length of tries = count
+tries = [], guessing = true;//length of tries = count
 
 /* **** Guessing Game Functions **** */
 
@@ -100,8 +100,7 @@ function playAgain(){
   $(".guessCount").html("");
   $("#message").removeClass("win")
   $("#message").removeClass("lose");
-    $("#guess").removeClass("disabled")
-
+  enableGuess();
 }
 
 function msgUpdate(msg){
@@ -122,6 +121,12 @@ function guessMessage(){
 
 function disableGuess() {
     $("#submit").addClass("disabled");
+    guessing = false;
+}
+
+function enableGuess() {
+  $("#submit").removeClass("disabled");
+  guessing = true;
 }
 
 /* **** Event Listeners/Handlers ****  */
@@ -136,7 +141,7 @@ $(document).ready(function() {
     }
   });
   $("input").keypress(function(event) {
-    if (event.which == 13) {
+    if (event.which == 13&&guessing) {
         event.preventDefault();
         playersGuessSubmission();
     }
