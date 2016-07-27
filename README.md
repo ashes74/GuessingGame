@@ -1,4 +1,4 @@
-# GuessingGame
+# [GuessingGame](http://ashes74.github.io/GuessingGame/)
 
 Guessing Game assignment
 
