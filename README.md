@@ -1,8 +1,8 @@
 # [GuessingGame](http://ashes74.github.io/GuessingGame/)
 
-Guess a number between 1 and 100 inclusive to win. 
-Get hints if you're struggling.
-Reset to start all over again.
+- Guess a number between 1 and 100 inclusive to win. 
+- Get hints if you're struggling.
+- Reset to start all over again.
 
 ------
 
